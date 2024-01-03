@@ -7,12 +7,14 @@ class VSRMultiselectOption extends StatefulWidget {
   final String? title;
   final EdgeInsets padding;
   final TextStyle? titleStyle;
+  final Function? valueCallback;
   const VSRMultiselectOption(
       {key,
       required this.options,
       this.title,
       this.padding = EdgeInsets.zero,
-      this.titleStyle})
+      this.titleStyle,
+      this.valueCallback})
       : super(key: key);
 
   @override
@@ -30,7 +32,7 @@ class _AppMultiselectOptionState extends State<VSRMultiselectOption> {
         children: [
           if (widget.title != null)
             VSRText(
-             widget.title,
+              widget.title,
               style: widget.titleStyle,
             ),
           Wrap(
@@ -38,10 +40,12 @@ class _AppMultiselectOptionState extends State<VSRMultiselectOption> {
               ...widget.options!
                   .map((value) => InkWell(
                         onTap: () {
+                          if (widget.valueCallback == null) return;
                           selectedValues.contains(value)
                               ? selectedValues.remove(value)
                               : selectedValues.add(value);
                           setState(() {});
+                          widget.valueCallback!(selectedValues);
                         },
                         child: Card(
                             color: selectedValues.contains(value)
