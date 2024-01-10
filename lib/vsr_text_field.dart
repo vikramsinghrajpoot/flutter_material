@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'vsr_text.dart';
@@ -7,9 +9,17 @@ class VSRTextField extends StatelessWidget {
   final Function? valueCallback;
   final TextStyle? hintTytle;
   final String? titleText;
+  final int? maxLines;
+  final TextInputType? keyboardType;
 
   const VSRTextField(
-      {key, this.hintText, this.valueCallback, this.hintTytle, this.titleText})
+      {key,
+      this.hintText,
+      this.valueCallback,
+      this.hintTytle,
+      this.titleText,
+      this.maxLines,
+      this.keyboardType})
       : super(key: key);
 
   @override
@@ -32,6 +42,8 @@ class VSRTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.0),
           ),
           child: TextField(
+            keyboardType: keyboardType,
+            maxLines: maxLines,
             onChanged: (v) => (valueCallback != null) ? valueCallback!(v) : {},
             decoration: InputDecoration(
               hintText: hintText ?? "",

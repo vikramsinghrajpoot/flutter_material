@@ -16,6 +16,7 @@ class VSRDropDown extends StatefulWidget {
   final TextStyle? hintStyle;
   final BoxBorder? border;
   final bool? isExpanded;
+  final Function? valueCallback;
   const VSRDropDown(
       {key,
       this.options,
@@ -31,7 +32,8 @@ class VSRDropDown extends StatefulWidget {
       this.hintStyle,
       this.titleStyle,
       this.border,
-      this.isExpanded = true})
+      this.isExpanded = true,
+      this.valueCallback})
       : super(key: key);
 
   @override
@@ -50,56 +52,58 @@ class _VSRDropDownState extends State<VSRDropDown> {
   @override
   Widget build(BuildContext context) {
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (widget.title != null)
-            VSRText(
-              widget.title ?? "",
-              padding: const EdgeInsets.only(left: 7, bottom: 3),
-              style: widget.titleStyle ??
-                  const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-            ),
-          Container(
-            padding: widget.padding,
-            margin: widget.margin,
-            decoration: BoxDecoration(
-                border:
-                    widget.border ?? Border.all(color: Colors.grey.shade400),
-                borderRadius: BorderRadius.circular(widget.borderRadius)),
-            child: SizedBox(
-              height: widget.height,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: DropdownButton<String>(
-                      underline: widget.userlineWidget,
-                      elevation: widget.elevation,
-                      hint: VSRText(
-                        widget.hintText,
-                        style: widget.hintStyle,
-                      ),
-                      isExpanded: widget.isExpanded!,
-                      value: selectedOption,
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedOption = newValue;
-                        });
-                      },
-                      items: widget.options?.map((String option) {
-                        return DropdownMenuItem<String>(
-                          value: option,
-                          child: VSRText(option),
-                        );
-                      }).toList(),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (widget.title != null)
+          VSRText(
+            widget.title ?? "",
+            padding: const EdgeInsets.only(left: 7, bottom: 3),
+            style: widget.titleStyle ??
+                const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          ),
+        Container(
+          padding: widget.padding,
+          margin: widget.margin,
+          decoration: BoxDecoration(
+              border: widget.border ?? Border.all(color: Colors.grey.shade400),
+              borderRadius: BorderRadius.circular(widget.borderRadius)),
+          child: SizedBox(
+            height: widget.height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: DropdownButton<String>(
+                    underline: widget.userlineWidget,
+                    elevation: widget.elevation,
+                    hint: VSRText(
+                      widget.hintText,
+                      style: widget.hintStyle,
                     ),
+                    isExpanded: widget.isExpanded!,
+                    value: selectedOption,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedOption = newValue;
+                      });
+                      if (widget.valueCallback != null) {
+                        widget.valueCallback!(selectedOption);
+                      }
+                    },
+                    items: widget.options?.map((String option) {
+                      return DropdownMenuItem<String>(
+                        value: option,
+                        child: VSRText(option),
+                      );
+                    }).toList(),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-        ],
+        ),
+      ],
     );
   }
 }
