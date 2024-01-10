@@ -49,9 +49,7 @@ class _VSRDropDownState extends State<VSRDropDown> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: widget.padding,
-      child: Column(
+    return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (widget.title != null)
@@ -102,7 +100,6 @@ class _VSRDropDownState extends State<VSRDropDown> {
             ),
           ),
         ],
-      ),
     );
   }
 }
