@@ -10,6 +10,7 @@ class VSRTextField extends StatelessWidget {
   final TextStyle? hintTytle;
   final String? titleText;
   final int? maxLines;
+  final int? maxLength;
   final TextInputType? keyboardType;
 
   const VSRTextField(
@@ -19,7 +20,8 @@ class VSRTextField extends StatelessWidget {
       this.hintTytle,
       this.titleText,
       this.maxLines,
-      this.keyboardType})
+      this.keyboardType,
+      this.maxLength})
       : super(key: key);
 
   @override
@@ -42,13 +44,15 @@ class VSRTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.0),
           ),
           child: TextField(
+            maxLength: maxLength,
             keyboardType: keyboardType,
             maxLines: maxLines,
             onChanged: (v) => (valueCallback != null) ? valueCallback!(v) : {},
             decoration: InputDecoration(
               hintText: hintText ?? "",
               border: InputBorder.none,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
             ),
           ),
         ),
