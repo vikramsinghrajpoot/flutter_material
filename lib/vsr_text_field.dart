@@ -1,8 +1,4 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-
-import 'vsr_text.dart';
 
 class VSRTextField extends StatelessWidget {
   final String? hintText;
@@ -12,51 +8,98 @@ class VSRTextField extends StatelessWidget {
   final int? maxLines;
   final int? maxLength;
   final TextInputType? keyboardType;
+  final TextStyle? titleSytle;
+  final TextStyle? textSytle;
+  final TextStyle? errorSytle;
+  final double height;
+  final EdgeInsets padding;
+  final String? value;
+  final bool obscureText;
+  final double radius;
+  final Widget? suffixIcon;
+  final Color borderColor;
+  final EdgeInsets? contentPadding;
+  final String? errorText;
 
   const VSRTextField(
-      {key,
+      {super.key,
       this.hintText,
       this.valueCallback,
       this.hintTytle,
       this.titleText,
       this.maxLines,
       this.keyboardType,
-      this.maxLength})
-      : super(key: key);
+      this.maxLength,
+      this.titleSytle,
+      this.textSytle,
+      this.height = 40,
+      this.value,
+      this.obscureText = false,
+      this.radius = 5,
+      this.suffixIcon,
+      this.borderColor = Colors.black,
+      this.padding = EdgeInsets.zero,
+      this.contentPadding,
+      this.errorSytle,
+      this.errorText});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        VSRText(
-          titleText,
-          style: hintTytle,
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 3),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey,
-              width: 1.0,
+    return Padding(
+      padding: padding,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (titleText != null)
+            Text(
+              titleText ?? "",
+              style: titleSytle,
             ),
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          child: TextField(
-            maxLength: maxLength,
-            keyboardType: keyboardType,
-            maxLines: maxLines,
-            onChanged: (v) => (valueCallback != null) ? valueCallback!(v) : {},
-            decoration: InputDecoration(
-              hintText: hintText ?? "",
-              border: InputBorder.none,
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+          if (titleText != null)
+            const SizedBox(
+              height: 3,
+            ),
+          SizedBox(
+            height: height,
+            child: TextFormField(
+              obscureText: obscureText,
+              initialValue: value,
+              style: textSytle,
+              maxLength: maxLength,
+              keyboardType: keyboardType,
+              maxLines: maxLines,
+              onChanged: (v) =>
+                  (valueCallback != null) ? valueCallback!(v) : {},
+              decoration: InputDecoration(
+                suffixIcon: suffixIcon,
+                hintText: hintText ?? "",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(radius),
+                    borderSide: BorderSide(
+                      color: borderColor,
+                    )),
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(radius),
+                    borderSide: BorderSide(
+                      color: borderColor,
+                    )),
+                contentPadding: contentPadding ??
+                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
+              ),
             ),
           ),
-        ),
-      ],
+          if (errorText != null)
+            const SizedBox(
+              height: 2,
+            ),
+          if (errorText != null)
+            Text(
+              errorText ?? "",
+              style: const TextStyle(color: Colors.red).merge(errorSytle),
+            ),
+        ],
+      ),
     );
   }
 }
