@@ -65,7 +65,7 @@ class VSRTextField extends StatelessWidget {
           SizedBox(
             height: height,
             child: TextFormField(
-              isReadOnly : isReadOnly,
+              readOnly : isReadOnly,
               obscureText: obscureText,
               initialValue: value,
               style: textSytle,
