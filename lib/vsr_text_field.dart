@@ -20,6 +20,7 @@ class VSRTextField extends StatelessWidget {
   final Color borderColor;
   final EdgeInsets? contentPadding;
   final String? errorText;
+  final bool isReadOnly;
 
   const VSRTextField(
       {Key? key,
@@ -41,6 +42,7 @@ class VSRTextField extends StatelessWidget {
       this.padding = EdgeInsets.zero,
       this.contentPadding,
       this.errorSytle,
+      this.isReadOnly = false,
       this.errorText});
 
   @override
@@ -63,6 +65,7 @@ class VSRTextField extends StatelessWidget {
           SizedBox(
             height: height,
             child: TextFormField(
+              isReadOnly : isReadOnly,
               obscureText: obscureText,
               initialValue: value,
               style: textSytle,
