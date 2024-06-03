@@ -5,12 +5,14 @@ class VSRRoundButton extends StatelessWidget {
   final Color color;
   final Icon? icon;
   final String label;
+  final Color? labelColor;
 
 const VSRRoundButton({ key,
     required this.onPressed,
     required this.color,
     this.icon,
     required this.label,
+    this.labelColor= Colors.white
   }) :super(key: key);
 
   @override
@@ -30,7 +32,7 @@ const VSRRoundButton({ key,
         mainAxisSize: MainAxisSize.min,
         children: [
           Spacer(),
-          Text(label),
+          Text(label,style: TextStyle(color: labelColor)),
           Spacer(),
           if (icon != null) icon!,
         ],
