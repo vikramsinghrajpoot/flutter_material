@@ -46,6 +46,7 @@ class _VSRDropDownState extends State<VSRDropDown> {
   @override
   void initState() {
     if (widget.defaultValue == null) selectedOption = widget.options?.first;
+    else selectedOption = widget.defaultValue;
     super.initState();
   }
 
