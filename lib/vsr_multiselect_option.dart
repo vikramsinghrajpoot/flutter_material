@@ -50,7 +50,7 @@ class _AppMultiselectOptionState extends State<VSRMultiselectOption> {
                         },
                         child: Card(
                             color: selectedValues.contains(value)
-                                ? selectedColor
+                                ? widget.selectedColor
                                 : Colors.white,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
