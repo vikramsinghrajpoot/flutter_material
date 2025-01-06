@@ -8,13 +8,14 @@ class VSRMultiselectOption extends StatefulWidget {
   final EdgeInsets padding;
   final TextStyle? titleStyle;
   final Function? valueCallback;
+  final Color selectedColor;
   const VSRMultiselectOption(
       {key,
       required this.options,
       this.title,
       this.padding = EdgeInsets.zero,
       this.titleStyle,
-      this.valueCallback})
+      this.valueCallback,this.selectedColor = Colors.green})
       : super(key: key);
 
   @override
