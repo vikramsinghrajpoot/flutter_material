@@ -77,7 +77,7 @@ class VSRTextField extends StatelessWidget {
                   (valueCallback != null) ? valueCallback!(v) : {},
               decoration: InputDecoration(
                 suffixIcon: suffixIcon,
-                prefixIcon: prefixIcon
+                prefixIcon: prefixIcon,
                 hintText: hintText ?? "",
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(radius),
