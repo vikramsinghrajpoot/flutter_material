@@ -21,6 +21,7 @@ class VSRTextField extends StatelessWidget {
   final EdgeInsets? contentPadding;
   final String? errorText;
   final bool isReadOnly;
+  final Widget? prefixIcon;
 
   const VSRTextField(
       {Key? key,
@@ -43,7 +44,7 @@ class VSRTextField extends StatelessWidget {
       this.contentPadding,
       this.errorSytle,
       this.isReadOnly = false,
-      this.errorText});
+      this.errorText, this.prefixIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +77,7 @@ class VSRTextField extends StatelessWidget {
                   (valueCallback != null) ? valueCallback!(v) : {},
               decoration: InputDecoration(
                 suffixIcon: suffixIcon,
+                prefixIcon: prefixIcon
                 hintText: hintText ?? "",
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(radius),
