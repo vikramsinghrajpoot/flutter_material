@@ -56,7 +56,7 @@ class _AppMultiselectOptionState extends State<VSRMultiselectOption> {
                                 : Colors.white,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: VSRText(value,style:widget.selectedColor ? widget.selectedTitleStyle:widget.titleStyle),
+                              child: VSRText(value,style:selectedValues.contains(value) ? widget.selectedTitleStyle : widget.titleStyle),
                             )),
                       ))
                   .toList()
