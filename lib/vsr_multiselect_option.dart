@@ -9,12 +9,14 @@ class VSRMultiselectOption extends StatefulWidget {
   final TextStyle? titleStyle;
   final Function? valueCallback;
   final Color selectedColor;
+  final TextStyle? selectedTitleStyle;
   const VSRMultiselectOption(
       {key,
       required this.options,
       this.title,
       this.padding = EdgeInsets.zero,
       this.titleStyle,
+      this.selectedTitleStyle,
       this.valueCallback,this.selectedColor = Colors.green})
       : super(key: key);
 
@@ -54,7 +56,7 @@ class _AppMultiselectOptionState extends State<VSRMultiselectOption> {
                                 : Colors.white,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: VSRText(value),
+                              child: VSRText(value,style:widget.selectedTitleStyle),
                             )),
                       ))
                   .toList()
