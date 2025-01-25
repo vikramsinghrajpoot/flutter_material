@@ -10,6 +10,8 @@ class VSRMultiselectOption extends StatefulWidget {
   final Function? valueCallback;
   final Color selectedColor;
   final TextStyle? selectedTitleStyle;
+  final List<String>? selectedValues;
+
   const VSRMultiselectOption(
       {key,
       required this.options,
@@ -17,7 +19,9 @@ class VSRMultiselectOption extends StatefulWidget {
       this.padding = EdgeInsets.zero,
       this.titleStyle,
       this.selectedTitleStyle,
-      this.valueCallback,this.selectedColor = Colors.green})
+      this.valueCallback,
+      this.selectedColor = Colors.green,
+      this.selectedValues})
       : super(key: key);
 
   @override
@@ -26,6 +30,15 @@ class VSRMultiselectOption extends StatefulWidget {
 
 class _AppMultiselectOptionState extends State<VSRMultiselectOption> {
   List<String> selectedValues = List<String>.empty(growable: true);
+
+  @override
+  void initState() {
+    if (widget.selectedValues != null) {
+      selectedValues = widget.selectedValues!;
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -56,7 +69,10 @@ class _AppMultiselectOptionState extends State<VSRMultiselectOption> {
                                 : Colors.white,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: VSRText(value,style:selectedValues.contains(value) ? widget.selectedTitleStyle : widget.titleStyle),
+                              child: VSRText(value,
+                                  style: selectedValues.contains(value)
+                                      ? widget.selectedTitleStyle
+                                      : widget.titleStyle),
                             )),
                       ))
                   .toList()
