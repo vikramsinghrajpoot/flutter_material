@@ -70,6 +70,9 @@ class VSRTextField extends StatelessWidget {
           SizedBox(
             height: height,
             child: TextFormField(
+              onFieldSubmitted: (_) {
+                FocusScope.of(context).unfocus();
+              },
               inputFormatters: inputFormatters,
               readOnly: isReadOnly,
               obscureText: obscureText,
