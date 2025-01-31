@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class VSRTextField extends StatelessWidget {
   final String? hintText;
@@ -22,9 +23,10 @@ class VSRTextField extends StatelessWidget {
   final String? errorText;
   final bool isReadOnly;
   final Widget? prefixIcon;
+  final List<TextInputFormatter>? inputFormatters;
 
   const VSRTextField(
-      {Key? key,
+      {super.key,
       this.hintText,
       this.valueCallback,
       this.hintTytle,
@@ -44,7 +46,9 @@ class VSRTextField extends StatelessWidget {
       this.contentPadding,
       this.errorSytle,
       this.isReadOnly = false,
-      this.errorText, this.prefixIcon});
+      this.errorText,
+      this.prefixIcon,
+      this.inputFormatters});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +70,8 @@ class VSRTextField extends StatelessWidget {
           SizedBox(
             height: height,
             child: TextFormField(
-              readOnly : isReadOnly,
+              inputFormatters: inputFormatters,
+              readOnly: isReadOnly,
               obscureText: obscureText,
               initialValue: value,
               style: textSytle,
